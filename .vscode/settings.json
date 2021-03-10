@@ -1,0 +1,8 @@
+{
+	"deno.enable": true,
+	"deno.lint": true,
+	"deno.unstable": true,
+	"deno.codeLens.referencesAllFunctions": true,
+	"deno.codeLens.implementations": true,
+	"deno.codeLens.references": true
+}

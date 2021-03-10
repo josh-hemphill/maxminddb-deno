@@ -1,0 +1,38 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Debug Deno",
+			"type": "pwa-node",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"runtimeExecutable": "deno",
+			"program": "mod.ts",
+			"runtimeArgs": [
+				"run",
+				"--inspect-brk",
+				"--allow-all"
+			],
+			"outputCapture": "std",
+			"attachSimplePort": 9229
+		},
+		{
+			"name": "Debug Deno Build",
+			"type": "pwa-node",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"runtimeExecutable": "deno",
+			"program": "build.js",
+			"runtimeArgs": [
+				"run",
+				"--inspect-brk",
+				"--allow-all"
+			],
+			"outputCapture": "std",
+			"attachSimplePort": 9229
+		}
+	]
+}

@@ -1,0 +1,6 @@
+wasm-deno-maxminddb/target
+**/*.rs.bk
+wasm-deno-maxminddb/Cargo.lock
+wasm-deno-maxminddb/bin/
+wasm-deno-maxminddb/pkg/
+wasm-deno-maxminddb/wasm-pack.log
