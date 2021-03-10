@@ -25,7 +25,7 @@
 			"request": "launch",
 			"cwd": "${workspaceFolder}",
 			"runtimeExecutable": "deno",
-			"program": "build.js",
+			"program": "build.ts",
 			"runtimeArgs": [
 				"run",
 				"--inspect-brk",

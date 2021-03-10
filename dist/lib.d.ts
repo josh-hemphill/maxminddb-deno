@@ -1,13 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
-
-interface ITextStyle {
-    bold: boolean;
-    italic: boolean;
-    size: number;
-}
-
-
+/**
+*/
+export function run(): void;
 /**
 */
 export class Maxmind {
@@ -30,8 +25,11 @@ export interface InitOutput {
   readonly __wbg_maxmind_free: (a: number) => void;
   readonly maxmind_new: (a: number, b: number) => number;
   readonly maxmind_lookup_city: (a: number, b: number, c: number) => number;
+  readonly run: () => void;
   readonly __wbindgen_malloc: (a: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
+  readonly __wbindgen_free: (a: number, b: number) => void;
+  readonly __wbindgen_start: () => void;
 }
 
 /**

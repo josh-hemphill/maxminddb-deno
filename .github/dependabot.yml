@@ -1,0 +1,38 @@
+version: 2
+updates:
+  - package-ecosystem: "cargo"
+    directory: "wasm-deno-maxminddb"
+    schedule:
+      interval: "monthly"
+    assignees:
+      - "josh-hemphill"
+    open-pull-requests-limit: 1
+    allow:
+      - dependency-type: "development"
+    labels:
+      - "cargo"
+      - "dev-dep"
+  - package-ecosystem: "cargo"
+    directory: "wasm-deno-maxminddb"
+    schedule:
+      interval: "daily"
+    assignees:
+      - "josh-hemphill"
+    open-pull-requests-limit: 1
+    allow:
+      - dependency-type: "production"
+    labels:
+      - "cargo"
+      - "triage"
+      - "dep"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    assignees:
+      - "josh-hemphill"
+    open-pull-requests-limit: 1
+    labels:
+      - "actions"
+      - "triage"
+      - "dep"

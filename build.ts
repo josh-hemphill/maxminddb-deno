@@ -1,18 +1,18 @@
-Deno.run({
-	cmd:['cargo','build','--target','wasm32-unknown-unknown'],
-	cwd: 'wasm-deno-maxminddb'
+import {dirname,fromFileUrl,resolve,join} from "https://deno.land/std/path/mod.ts";
+const dir = resolve(dirname(fromFileUrl(import.meta.url)))
+if (Array.from(Deno.readDirSync(dir)).some(v => v.name === 'dist' && v.isDirectory)) {
+	await Deno.remove(resolve(dir,'dist'),{recursive:true})
+}
+await Deno.mkdir(resolve(dir,'dist'))
+let p: Deno.Process = Deno.run({
+	cmd:['wasm-pack','build','--target','web',resolve(dir,'wasm-deno-maxminddb')]
 })
-Deno.run({
-	cmd:['wasm-gc','wasm_deno_maxminddb.wasm'],
-	cwd: 'wasm-deno-maxminddb/target/wasm32-unknown-unknown/debug/'
-})
-Deno.run({
-	cmd:['wasm-pack','build','--target','web','wasm-deno-maxminddb']
-})
-Deno.run({
+await p.status()
+p = Deno.run({
 	cmd:['wasm-gc','wasm_deno_maxminddb_bg.wasm'],
 	cwd: 'wasm-deno-maxminddb/pkg'
 })
+await p.status()
 
 class encDec {
 	encoder: TextEncoder;
@@ -27,19 +27,30 @@ class encDec {
 
 const enc =  new encDec()
 
-await Deno.copyFile('./wasm-deno-maxminddb/pkg/wasm_deno_maxminddb.d.ts','./dist/lib.d.ts')
-const wasm = JSON.stringify(Array.from(await Deno.readFile("./wasm-deno-maxminddb/pkg/wasm_deno_maxminddb_bg.wasm")));
-const lib = enc.enc(enc.dec(await Deno.readFile("./wasm-deno-maxminddb/pkg/wasm_deno_maxminddb.js")).replace(`
-    init.__wbindgen_wasm_module = module;
+await Deno.copyFile(resolve(dir,'wasm-deno-maxminddb/pkg/wasm_deno_maxminddb.d.ts'), join(resolve('dist'), 'lib.d.ts'))
 
+const wasm = JSON.stringify(Array.from(await Deno.readFile(resolve(dir,"wasm-deno-maxminddb/pkg/wasm_deno_maxminddb_bg.wasm"))));
+const lib = enc.enc(enc.dec(await Deno.readFile(resolve(dir,"wasm-deno-maxminddb/pkg/wasm_deno_maxminddb.js"))).replace(`
+    const { instance, module } = await load(await input, imports);
+
+    wasm = instance.exports;
+    init.__wbindgen_wasm_module = module;
+    wasm.__wbindgen_start();
     return wasm;
 }
 
 export default init;
-`,'\n}').replace(`
+
+`,`
+    const { instance } = await load(input, imports);
+
+    wasm = instance.exports;
+	wasm.__wbindgen_start();
+}
+`).replace(`
 async function init(input) {
 `,`{
 let input = new Uint8Array(${wasm});
 `));
 
-await Deno.writeFile('./dist/lib.js',lib)
+await Deno.writeFile(join(resolve('dist'),'lib.js'),lib)

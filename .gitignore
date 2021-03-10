@@ -1,6 +1,6 @@
 wasm-deno-maxminddb/target
 **/*.rs.bk
-test/GeoLite2-City.mmdb
+test/*.mmdb
 wasm-deno-maxminddb/Cargo.lock
 wasm-deno-maxminddb/bin/
 wasm-deno-maxminddb/pkg/
