@@ -2,8 +2,8 @@ name: Release
 on:
   push:
     branches:
-      - latest
-      - latest-next
+      - dev
+      - dev-next
       - next
       - beta
       - alpha
