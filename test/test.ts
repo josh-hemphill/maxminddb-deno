@@ -1,6 +1,8 @@
 import {dirname,fromFileUrl,resolve} from "https://deno.land/std/path/mod.ts";
 const testDir = dirname(fromFileUrl(import.meta.url))
-const dbFile = await Deno.readFile( resolve(testDir,"GeoLite2-City-Test.mmdb"));
+const dbFile = await fetch('https://github.com/maxmind/MaxMind-DB/raw/main/test-data/GeoLite2-City-Test.mmdb')
+	.then(v => v.arrayBuffer())
+	.then(v => new Uint8Array(v));
 
 const MaxmindModule = await import(resolve(testDir,'../','dist','lib.js'))
 const Maxmind = MaxmindModule.Maxmind
