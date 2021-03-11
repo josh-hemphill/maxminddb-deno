@@ -3,9 +3,11 @@ name: Build
 on:
   push:
     paths:
-      - dist
-      - test
-      - wasm-deno-maxminddb
+      - "**.ts"
+      - ".github/workflows/**.yml"
+      - "dist/**"
+      - "test/**"
+      - "wasm-deno-maxminddb/**"
     branches:
       - dev
       - dev-next
@@ -15,9 +17,11 @@ on:
 
   pull_request:
     paths:
-      - dist
-      - test
-      - wasm-deno-maxminddb
+      - "**.ts"
+      - ".github/workflows/**.yml"
+      - "dist/**"
+      - "test/**"
+      - "wasm-deno-maxminddb/**"
     types:
       - opened
       - synchronize
