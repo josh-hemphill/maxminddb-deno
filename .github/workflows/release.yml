@@ -21,8 +21,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14
-      - name: Setup package.json
-        run: echo '{"name":"josh-hemphill/maxminddb-deno","version":"0.0.0","publishConfig":{"access":"public"},"scripts":{"semantic-release":"semantic-release"},"repository":{"type":"git","url":"https://github.com/josh-hemphill/maxminddb-deno.git"},"contributors":[{"name":"JoshuaHemphill","url":"https://joshuahemphill.com","email":"jhemphill@tecnicocorp.com"}],"license":"MIT","bugs":{"url":"https://github.com/josh-hemphill/maxminddb-deno/issues"},"homepage":"https://github.com/josh-hemphill/maxminddb-deno","devDependencies":{"semantic-release":"^17","semantic-release-gitmoji":"^1"}}' > package.json
       - name: Install dependencies
         run: npm install
       - name: Release
