@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/josh-hemphill/maxminddb-deno/compare/v1.0.0...v1.1.0) (2021-03-11)
+
+
+### Features
+
+* :sparkles: Get Metadata from database ([ef3dfe8](https://github.com/josh-hemphill/maxminddb-deno/commit/ef3dfe84493188c60bd08c30b8abe398b60be2b6))
+
 # 1.0.0 (2021-03-11)
 
 
