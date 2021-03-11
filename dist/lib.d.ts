@@ -16,6 +16,10 @@ export class Maxmind {
 * @returns {any}
 */
   lookup_city(ip_str: string): any;
+/**
+* @returns {any}
+*/
+  readonly metadata: any;
 }
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
@@ -25,6 +29,7 @@ export interface InitOutput {
   readonly __wbg_maxmind_free: (a: number) => void;
   readonly maxmind_new: (a: number, b: number) => number;
   readonly maxmind_lookup_city: (a: number, b: number, c: number) => number;
+  readonly maxmind_get_metadata: (a: number) => number;
   readonly run: () => void;
   readonly __wbindgen_malloc: (a: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
