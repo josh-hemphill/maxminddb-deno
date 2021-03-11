@@ -24,6 +24,6 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Release
-        run: npx semantic-release
+        run: npm run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

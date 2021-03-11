@@ -26,8 +26,8 @@
 	"devDependencies": {
 		"semantic-release": "^17",
 		"semantic-release-gitmoji": "^1",
-		"@semantic-release/changelog": "^5.0.1",
-		"@semantic-release/git": "^9.0.0",
-		"semantic-release-license": "^1.0.2"
+		"@semantic-release/changelog": "^5",
+		"@semantic-release/git": "^9",
+		"semantic-release-license": "^1"
 	}
 }
