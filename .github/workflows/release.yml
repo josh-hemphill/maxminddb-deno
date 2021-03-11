@@ -13,9 +13,19 @@ jobs:
   release:
     name: release
     runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-      - run: npx semantic-release
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Setup package.json
+        run: echo '{"name":"josh-hemphill/maxminddb-deno","version":"0.0.0","publishConfig":{"access":"public"},"scripts":{"semantic-release":"semantic-release"},"repository":{"type":"git","url":"https://github.com/josh-hemphill/maxminddb-deno.git"},"contributors":[{"name":"JoshuaHemphill","url":"https://joshuahemphill.com","email":"jhemphill@tecnicocorp.com"}],"license":"MIT","bugs":{"url":"https://github.com/josh-hemphill/maxminddb-deno/issues"},"homepage":"https://github.com/josh-hemphill/maxminddb-deno","devDependencies":{"semantic-release":"^17","semantic-release-gitmoji":"^1"}}' > package.json
+      - name: Install dependencies
+        run: npm install
+      - name: Release
+        run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -5,7 +5,7 @@
   <strong>A library that enables the usage of MaxmindDB geoIP databases by using the Rust library in a WebAssembly module</strong>
 
   <p>
-    <a href="https://travis-ci.org/josh-hemphill/maxminddb-deno"><img src="https://img.shields.io/github/workflow/status/josh-hemphill/maxminddb-deno/test?logo=deno&style=flat-square" alt="Build Status" /></a>
+    <a href="https://github.com/josh-hemphill/maxminddb-deno/actions/workflows/test.yml"><img src="https://img.shields.io/github/workflow/status/josh-hemphill/maxminddb-deno/test?logo=deno&style=flat-square" alt="Build Status" /></a>
   </p>
 
   <sub>Built with 🦀🕸 by <a href="https://rustwasm.github.io/">The Rust and WebAssembly Working Group</a></sub>
@@ -15,9 +15,12 @@
 
 Uses the [Rust MaxmindDB library](https://crates.io/crates/maxminddb) and stripping of all filesystem dependency to create a WASM binary that gets embedded (there's currently some issues around how to handle loading WASM in Deno libraries, so it's inlined as a `Uint8Array`) to let you pass in the database yourself in `js/ts` and make it queryable.
 
+Unfortunately, there's not currently a good way to auto-generate the type information for the exported object, so you'll have to refer to the example or now, though I will be working on getting that sorted out.
+
 ## 🚴 Usage
 
 Instantiate a new MaxmindDB database by passing it as a raw `Uint8Array`
+
 ```ts
 import { Maxmind } from "./mod.ts";
 const dbRawFile = await Deno.readFile('./GeoLite2-City.mmdb')
@@ -103,3 +106,22 @@ result = {{
   traits: undefined
 }}
 ```
+
+## Contributing
+
+### Build Setup
+
+For running the automated build (which includes compiling the rust wasm) you'll need the following tools installed
+
+  - Deno
+  - Rust
+  - wasm-pack
+  - wasm-gc
+
+Once you have all the necessary tools installed, you can just run `deno run --allow-run --allow-read --allow-write build.ts`
+
+It builds the wasm and interfacing javascript and typescript definitions, does some transformation on the javascript to support Deno, and writes it to the dist folder.
+
+### Testing
+
+Under `test/test.ts`, the single non-comprehensive test downloads the available GeoLite2 test database from the Maxmind github repo, and uses that to test that basic functionality works. Since it fetches the test database over the network every run, it is a little slower (Though the test database is pretty small).
