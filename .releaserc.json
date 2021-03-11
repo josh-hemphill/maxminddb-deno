@@ -17,8 +17,23 @@
 		"@semantic-release/commit-analyzer",
 		"@semantic-release/release-notes-generator",
 		"@semantic-release/changelog",
-		"semantic-release-license",
+		[
+			"semantic-release-license",
+			{
+				"license": {
+					"path": "LICENSE"
+				}
+			}
+		],
 		"@semantic-release/github",
-		"@semantic-release/git"
+		[
+			"@semantic-release/git",
+			{
+				"assets": [
+					"LICENSE",
+					"CHANGELOG.md"
+				]
+			}
+		]
 	]
 }
