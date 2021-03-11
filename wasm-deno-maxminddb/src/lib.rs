@@ -59,14 +59,16 @@ impl Maxmind {
     pub fn lookup_city(&self, ip_str: &str) -> Result<JsValue, JsValue> {
         let ip_addr_str: IpAddr = ip_str.parse::<IpAddr>().expect_throw("Invalid IP");
         let result: geoip2::City = self.db.lookup(ip_addr_str).expect_throw("Result Not Found");
-        Ok(serde_wasm_bindgen::to_value(&result)
-            .expect_throw("Result Could not be converted to Javascript"))
+        Ok(
+            JsValue::from_serde(&result)
+                .expect_throw("Result Could not be converted to Javascript"),
+        )
     }
 
     #[wasm_bindgen(getter = metadata)]
     pub fn get_metadata(&self) -> Result<JsValue, JsValue> {
         let metadata = Metadata::new(&self.db);
-        Ok(serde_wasm_bindgen::to_value(&metadata)
+        Ok(JsValue::from_serde(&metadata)
             .expect_throw("Result Could not be converted to Javascript"))
     }
 }
