@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/josh-hemphill/maxminddb-deno/compare/v1.1.0...v1.2.0) (2021-03-11)
+
+
+### Features
+
+* :recycle: Changing to JSON serialization ([7b1543a](https://github.com/josh-hemphill/maxminddb-deno/commit/7b1543ac824134aebd3eeaf60cfae4f6073c37ad))
+
 # [1.1.0](https://github.com/josh-hemphill/maxminddb-deno/compare/v1.0.0...v1.1.0) (2021-03-11)
 
 
