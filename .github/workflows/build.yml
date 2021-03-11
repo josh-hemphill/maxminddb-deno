@@ -1,0 +1,41 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - dev
+      - dev-next
+      - next
+      - beta
+      - "*.x" # maintenance releases branches
+
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v2
+
+        # Rust setup
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Install WASM-Pack
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
+        # Deno Setup
+      - name: Setup Deno
+        uses: denolib/setup-deno@v2
+        with:
+          deno-version: v1.x
+
+        # Run build
+      - name: Run Build
+        run: deno run -A --unstable ./build.ts

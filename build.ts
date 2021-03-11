@@ -4,7 +4,7 @@ if (Array.from(Deno.readDirSync(dir)).some(v => v.name === 'dist' && v.isDirecto
 	await Deno.remove(resolve(dir,'dist'),{recursive:true})
 }
 await Deno.mkdir(resolve(dir,'dist'))
-let p: Deno.Process = Deno.run({
+const p = Deno.run({
 	cmd:['wasm-pack','build','--target','web',resolve(dir,'wasm-deno-maxminddb')]
 })
 await p.status()

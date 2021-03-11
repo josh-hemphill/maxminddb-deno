@@ -1,21 +1,14 @@
 name: Test
 
 on:
-  push:
-    branches:
-      - dev
-      - dev-next
-      - next
-      - beta
-      - "*.x" # maintenance releases branches
-
-  pull_request:
+  workflow_run:
+    workflows: ["Build"]
     types:
-      - opened
-      - synchronize
+      - completed
 
 jobs:
   test:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     strategy:
       matrix:
         deno: ["v1.x", "nightly"]
