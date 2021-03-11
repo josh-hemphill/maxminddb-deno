@@ -2,6 +2,10 @@ name: Build
 
 on:
   push:
+    paths:
+      - dist
+      - test
+      - wasm-deno-maxminddb
     branches:
       - dev
       - dev-next
@@ -10,6 +14,10 @@ on:
       - "*.x" # maintenance releases branches
 
   pull_request:
+    paths:
+      - dist
+      - test
+      - wasm-deno-maxminddb
     types:
       - opened
       - synchronize
