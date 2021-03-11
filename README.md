@@ -113,10 +113,9 @@ result = {{
 
 For running the automated build (which includes compiling the rust wasm) you'll need the following tools installed
 
-  - Deno
-  - Rust
-  - wasm-pack
-  - wasm-gc
+  - [Deno](https://deno.land/#installation)
+  - [Rust](https://doc.rust-lang.org/cargo/getting-started/installation.html)
+  - [wasm-pack](https://rustwasm.github.io/wasm-pack/installer/)
 
 Once you have all the necessary tools installed, you can just run `deno run --allow-run --allow-read --allow-write build.ts`
 

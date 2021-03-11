@@ -8,11 +8,6 @@ let p: Deno.Process = Deno.run({
 	cmd:['wasm-pack','build','--target','web',resolve(dir,'wasm-deno-maxminddb')]
 })
 await p.status()
-p = Deno.run({
-	cmd:['wasm-gc','wasm_deno_maxminddb_bg.wasm'],
-	cwd: 'wasm-deno-maxminddb/pkg'
-})
-await p.status()
 
 class encDec {
 	encoder: TextEncoder;
